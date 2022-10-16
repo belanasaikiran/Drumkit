@@ -1,18 +1,26 @@
 var numberOfButtons = document.querySelectorAll(".drum").length;
 
+//  On Button Click - with mouse
 for (var i = 0; i < numberOfButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     this.style.color = "white";
 
     var buttonInnerHTML = this.innerHTML;
     makeSound(buttonInnerHTML);
+
+    // Animation Function call
+    buttonAnimation(buttonInnerHTML);
   });
 }
 
+// On Key press
 document.addEventListener("keydown", function (event) {
-  console.log(event);
+  // console.log(event);
 
   makeSound(event.key);
+
+  // Animation Function call
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -56,4 +64,13 @@ function makeSound(key) {
       console.log(buttonInnerHTML);
       break;
   }
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
